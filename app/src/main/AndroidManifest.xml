@@ -15,6 +15,12 @@
         android:theme="@style/Theme.RegisterMobile"
         tools:targetApi="31">
         <activity
+            android:name=".MainEditProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
