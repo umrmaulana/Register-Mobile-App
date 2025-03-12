@@ -31,18 +31,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/rounded_background"
         android:focusable="true"
         android:focusableInTouchMode="true"
         android:focusedByDefault="true"
         android:orientation="vertical"
-        android:padding="40dp">
+        android:paddingLeft="40dp"
+        android:paddingRight="40dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="LOGIN"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             android:hint="email"
             app:hintTextColor="@color/black"
             app:boxStrokeColor="@color/secondary"
@@ -106,6 +117,7 @@
             android:backgroundTint="@color/primary"
             android:padding="16dp"
             android:text="Login"
+            app:icon="@drawable/baseline_login_24"
             android:textColor="#FFFFFF"
             android:textStyle="bold" />
 
