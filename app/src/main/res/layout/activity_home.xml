@@ -76,7 +76,7 @@
                                 android:id="@+id/tv_email"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="A22.2023.02996"
+                                android:text="umrmaulana1@gmail.com"
                                 android:textColor="#FFFFFF"
                                 android:textSize="14sp" />
                         </LinearLayout>
@@ -107,7 +107,7 @@
                     android:layout_gravity="center"
                     android:backgroundTint="@color/white"
                     app:cardCornerRadius="16dp"
-                    app:cardElevation="4dp">
+                    app:cardElevation="0dp">
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"

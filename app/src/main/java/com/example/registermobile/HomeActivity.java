@@ -58,7 +58,7 @@ public class HomeActivity extends AppCompatActivity {
                 finish();
             }
         });
-        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+        btnProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(HomeActivity.this, ProductActivity.class);
