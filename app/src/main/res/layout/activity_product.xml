@@ -10,58 +10,79 @@
     android:isScrollContainer="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/conLyout_pra_3_1"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-        <ImageView
-            android:id="@+id/imgView_pra_3_1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/rexus"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <TextView
-            android:id="@+id/tv_pra_3_1"
-            android:layout_width="wrap_content"
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="10dp"
-            android:text="Rexus Store"
-            android:textColor="@color/white"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/imgView_pra_3_1"
-            app:layout_constraintTop_toTopOf="parent" />
-        <TextView
-            android:layout_width="0dp"
+            android:background="#072F6C"
+            app:layout_constraintTop_toTopOf="parent"
+            app:title="Rexus Store"
+            app:titleTextColor="@android:color/white"
+            tools:layout_editor_absoluteX="43dp">
+
+            <androidx.appcompat.widget.AppCompatImageButton
+                android:id="@+id/cartButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/cart_white"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/transparent"/>
+
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/searchView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:background="@android:color/white"
+                android:queryHint="Search..." />
+
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:gravity="right"
-            android:text="Perlengkapan Aksesoris Gaming"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:textStyle="bold|italic"
+            android:background="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imgView_pra_3_1"
-            app:layout_constraintTop_toBottomOf="@id/tv_pra_3_1"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:tabIndicatorColor="@android:color/black"
+            app:tabSelectedTextColor="@android:color/black"
+            app:tabTextColor="@android:color/black">
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabMen"
+                android:text="Keyboard" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabWomen"
+                android:text="Mouse" />
+
+            <com.google.android.material.tabs.TabItem
+                android:id="@+id/tabKids"
+                android:text="Headset" />
+        </com.google.android.material.tabs.TabLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:fillViewport="true"
-        android:background="@drawable/rounded_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/conLyout_pra_3_1">
+        app:layout_constraintTop_toBottomOf="@+id/header">
 
         <LinearLayout
             android:layout_width="match_parent"
