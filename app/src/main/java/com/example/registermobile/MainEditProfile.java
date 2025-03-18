@@ -2,11 +2,11 @@ package com.example.registermobile;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,25 +30,46 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainEditProfile extends AppCompatActivity {
-    TextView tvWelcome, tvBack;
-    EditText etNama, etAlamat, etKota, etTelp, etKodepos, etProvinsi;
-    String email, nama;
-    Button imgBtnSubmit;
 
+    private TextView tvWelcome, tvBack;
+    private EditText etNama, etAlamat, etKota, etTelp, etKodepos, etProvinsi;
+    private Button btnSubmit;
+    private String email, nama;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main_edit_profile);
+
         getSupportActionBar().hide();
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        // Ambil data dari intent
         email = getIntent().getStringExtra("email");
         nama = getIntent().getStringExtra("nama");
+
+        // Inisialisasi UI
+        initViews();
+
+        // Set welcome message
+        tvWelcome.setText("Welcome : " + nama + " (" + email + ")");
+
+        // Set listener tombol kembali
+        tvBack.setOnClickListener(v -> navigateToHome());
+
+        // Ambil data profil
+        getProfil(email);
+
+        // Set listener tombol submit
+        btnSubmit.setOnClickListener(v -> updateProfil());
+    }
+
+    private void initViews() {
         etNama = findViewById(R.id.etProfile_Nama);
         etAlamat = findViewById(R.id.etProfile_Alamat);
         etKota = findViewById(R.id.etProfile_Kota);
@@ -57,65 +78,46 @@ public class MainEditProfile extends AppCompatActivity {
         etProvinsi = findViewById(R.id.etProfile_Province);
         tvWelcome = findViewById(R.id.tvWelcome);
         tvBack = findViewById(R.id.tvBack);
-        imgBtnSubmit = findViewById(R.id.btnSubmit);
-        tvWelcome.setText("Welcome :" + getIntent().getStringExtra("nama") + "(" + getIntent().getStringExtra("email") + ")");
-        tvBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainEditProfile.this, HomeActivity.class);
-                intent.putExtra("email", email);
-                intent.putExtra("nama", nama);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        getProfil(email);
-
-        imgBtnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DataPelanggan data = new DataPelanggan();
-                data.setNama(etNama.getText().toString());
-                data.setAlamat(etAlamat.getText().toString());
-                data.setKota(etKota.getText().toString());
-                data.setTelp(etTelp.getText().toString());
-                data.setKodepos(etKodepos.getText().toString());
-                data.setProvinsi(etProvinsi.getText().toString());
-                data.setEmail(email);
-
-                updateProfil(data);
-            }
-        });
+        btnSubmit = findViewById(R.id.btnSubmit);
     }
 
-    void getProfil(String vemail){
+    private void navigateToHome() {
+        Intent intent = new Intent(MainEditProfile.this, HomeActivity.class);
+        intent.putExtra("email", email);
+        intent.putExtra("nama", nama);
+        startActivity(intent);
+        finish();
+    }
+
+    private void getProfil(String vemail) {
         ServerAPI urlAPI = new ServerAPI();
-        String URL = urlAPI.BASE_URL;
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(urlAPI.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
         RegisterAPI api = retrofit.create(RegisterAPI.class);
-        api.getProfile(vemail).enqueue(new Callback<ResponseBody>(){
+        api.getProfile(vemail).enqueue(new Callback<ResponseBody>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 try {
-                    JSONObject json = new JSONObject(response.body().string());
-
-                    if(json.getString("result").toString().equals("1")){
-                        etNama.setText(json.getJSONObject("data").getString("nama"));
-                        etAlamat.setText(json.getJSONObject("data").getString("alamat"));
-                        etKota.setText(json.getJSONObject("data").getString("kota"));
-                        etProvinsi.setText(json.getJSONObject("data").getString("provinsi"));
-                        etTelp.setText(json.getJSONObject("data").getString("telp"));
-                        etKodepos.setText(json.getJSONObject("data").getString("kodepos"));
-
-                        Log.i("Info Profile",json.getJSONObject("data").getString("nama"));
-                    } else {
-
+                    if (response.body() != null) {
+                        JSONObject json = new JSONObject(response.body().string());
+                        if ("1".equals(json.getString("result"))) {
+                            JSONObject data = json.getJSONObject("data");
+                            etNama.setText(getValidString(data, "nama"));
+                            etAlamat.setText(getValidString(data, "alamat"));
+                            etKota.setText(getValidString(data, "kota"));
+                            etProvinsi.setText(getValidString(data, "provinsi"));
+                            etTelp.setText(getValidString(data, "telp"));
+                            etKodepos.setText(getValidString(data, "kodepos"));
+                        }
                     }
-                }catch (IOException | JSONException e){
+                } catch (IOException | JSONException e) {
                     e.printStackTrace();
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 t.printStackTrace();
@@ -123,29 +125,58 @@ public class MainEditProfile extends AppCompatActivity {
         });
     }
 
-    void updateProfil(DataPelanggan data){
-        ServerAPI urlAPI = new ServerAPI();
-        String URL = urlAPI.BASE_URL;
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(URL).addConverterFactory(GsonConverterFactory.create()).build();
-        RegisterAPI api = retrofit.create(RegisterAPI.class);
-        Call<ResponseBody> call = api.updateProfile(data.getNama(), data.getAlamat(), data.getKota(), data.getProvinsi(), data.getTelp(), data.getKodepos(), data.getEmail());
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                try{
-                    JSONObject json = new JSONObject(response.body().string());
-                    Toast.makeText(MainEditProfile.this, json.getString("message"), Toast.LENGTH_SHORT).show();
-                    getProfil(data.getEmail());
-                }catch (JSONException|IOException e){
-                    e.printStackTrace();
-                }
-            }
+    private void updateProfil() {
+        DataPelanggan data = new DataPelanggan();
+        data.setNama(etNama.getText().toString().trim());
+        data.setAlamat(etAlamat.getText().toString().trim());
+        data.setKota(etKota.getText().toString().trim());
+        data.setTelp(etTelp.getText().toString().trim());
+        data.setKodepos(etKodepos.getText().toString().trim());
+        data.setProvinsi(etProvinsi.getText().toString().trim());
+        data.setEmail(email);
 
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                AlertDialog.Builder msg = new AlertDialog.Builder(MainEditProfile.this);
-                msg.setMessage("Simpan Gagal, Error : "+t.toString()).setNegativeButton("Retry", null).create().show();
+        ServerAPI urlAPI = new ServerAPI();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(urlAPI.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+
+        RegisterAPI api = retrofit.create(RegisterAPI.class);
+        api.updateProfile(data.getNama(), data.getAlamat(), data.getKota(), data.getProvinsi(),
+                        data.getTelp(), data.getKodepos(), data.getEmail())
+                .enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        try {
+                            if (response.body() != null) {
+                                JSONObject json = new JSONObject(response.body().string());
+                                Toast.makeText(MainEditProfile.this, json.getString("message"), Toast.LENGTH_SHORT).show();
+                                getProfil(data.getEmail());
+                            }
+                        } catch (JSONException | IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        new AlertDialog.Builder(MainEditProfile.this)
+                                .setMessage("Simpan Gagal, Error: " + t.toString())
+                                .setNegativeButton("Retry", null)
+                                .create()
+                                .show();
+                    }
+                });
+    }
+
+    private String getValidString(JSONObject json, String key) {
+        try {
+            if (json.has(key) && !json.isNull(key)) {
+                return json.getString(key);
             }
-        });
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 }

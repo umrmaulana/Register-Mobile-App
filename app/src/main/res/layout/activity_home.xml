@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E9FDF4"
+    android:background="@color/secondary"
     tools:context=".HomeActivity">
 
     <ScrollView
@@ -55,7 +55,7 @@
                             android:layout_marginRight="16dp"
                             android:background="@color/white"
                             android:scaleType="centerCrop"
-                            android:src="@drawable/logoku" />
+                            android:src="@drawable/rexus" />
 
                         <LinearLayout
                             android:layout_width="0dp"

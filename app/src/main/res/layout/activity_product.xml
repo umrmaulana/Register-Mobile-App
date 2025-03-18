@@ -6,15 +6,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ProductActivity"
-    android:background="#072F6C"
+    android:background="@color/primary"
     android:isScrollContainer="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        tools:ignore="MissingConstraints">
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
@@ -31,9 +31,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:src="@drawable/cart_white"
                 android:layout_marginEnd="16dp"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:src="@drawable/cart_white"
+                tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/searchView"
@@ -43,8 +44,6 @@
                 android:layout_marginEnd="16dp"
                 android:background="@android:color/white"
                 android:queryHint="Search..." />
-
-
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -58,47 +57,19 @@
             app:layout_constraintTop_toBottomOf="@id/toolbar"
             app:tabIndicatorColor="@android:color/black"
             app:tabSelectedTextColor="@android:color/black"
-            app:tabTextColor="@android:color/black">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabMen"
-                android:text="Keyboard" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabWomen"
-                android:text="Mouse" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabKids"
-                android:text="Headset" />
-        </com.google.android.material.tabs.TabLayout>
+            app:tabTextColor="@android:color/darker_gray"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <ScrollView
-        android:layout_width="0dp"
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:fillViewport="true"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/header">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            tools:context=".ProductActivity">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="10dp"
-                tools:listitem="@layout/list_product" />
-
-        </LinearLayout>
-
-    </ScrollView>
+        app:layout_constraintTop_toBottomOf="@id/header"
+        tools:ignore="SpeakableTextPresentCheck" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

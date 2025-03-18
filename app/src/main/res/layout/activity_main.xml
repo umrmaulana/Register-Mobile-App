@@ -10,10 +10,10 @@
     android:background="@color/primary">
 
     <ImageView
-        android:id="@+id/logo_udinus"
+        android:id="@+id/logo"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/logoku"
+        android:src="@drawable/rexus"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"/>
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="16dp"
-        android:text="Proyek Aplikasi Mobile 2"
+        android:text="Rexus Store"
         android:textColor="#C5C5C5"
         android:textSize="24sp"
         android:textStyle="bold" />
@@ -58,18 +58,21 @@
             app:hintTextColor="@color/black"
             app:boxStrokeColor="@color/secondary"
             app:boxStrokeWidth="2dp"
-            app:startIconDrawable="@drawable/user"
+            app:startIconDrawable="@drawable/email"
             app:endIconMode="clear_text"
             app:boxCornerRadiusTopStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
-            app:boxCornerRadiusBottomEnd="12dp">
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="50">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="text"
+                android:maxLength="50"
                 tools:ignore="TouchTargetSizeCheck" />
 
         </com.google.android.material.textfield.TextInputLayout>

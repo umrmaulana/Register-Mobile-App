@@ -14,6 +14,10 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,11 +28,9 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ProductActivity extends AppCompatActivity {
-    public static final String URL = new ServerAPI().BASE_URL;
-    String email, nama;
-    private RecyclerView recyclerView;
-    private ProductAdapter adapter;
-    private List<Product> productList;
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private ViewPagerAdapter viewPagerAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,59 +43,15 @@ public class ProductActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        recyclerView = findViewById(R.id.recyclerView);
-        GridLayoutManager layoutManager = new GridLayoutManager(this, 2);
-        recyclerView.setLayoutManager(layoutManager);
-        productList = new ArrayList<>();
-        adapter = new ProductAdapter(this, productList);
-        recyclerView.setAdapter(adapter);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
 
-        fetchProducts();
+        viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager());
+        viewPagerAdapter.addFragment(new KeyboardFragment(), "Keyboard");
+        viewPagerAdapter.addFragment(new MouseFragment(), "Mouse");
+        viewPagerAdapter.addFragment(new HeadsetFragment(), "Headset");
 
-        email = getIntent().getStringExtra("email");
-        nama = getIntent().getStringExtra("nama");
-        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
-            @Override
-            public void handleOnBackPressed() {
-                Intent intent = new Intent(ProductActivity.this, HomeActivity.class);
-                intent.putExtra("email", email);
-                intent.putExtra("nama", nama);
-                startActivity(intent);
-                finish();
-            }
-        });
-    }
-
-    private void fetchProducts() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        RegisterAPI apiService = retrofit.create(RegisterAPI.class);
-        Call<ProductResponse> call = apiService.getProducts();
-
-        call.enqueue(new Callback<ProductResponse>() {
-            @Override
-            public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    if (response.body().getResult() != null) {
-                        productList.clear();
-                        productList.addAll(response.body().getResult());
-                        adapter.notifyDataSetChanged();
-                    } else {
-                        Toast.makeText(ProductActivity.this, "Data tidak tersedia", Toast.LENGTH_SHORT).show();
-                    }
-                } else {
-                    Toast.makeText(ProductActivity.this, "Failed to fetch data", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ProductResponse> call, Throwable t) {
-                t.printStackTrace();
-                Toast.makeText(ProductActivity.this, "Network error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        });
+        viewPager.setAdapter(viewPagerAdapter);
+        tabLayout.setupWithViewPager(viewPager);
     }
 }

@@ -84,6 +84,211 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/tvProfile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="Edit Profile"
+                android:textColor="#072F6C"
+                android:textSize="34sp"
+                android:textStyle="bold"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfNama"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Nama"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/secondary"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/user"
+                app:endIconMode="clear_text"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                android:layout_below="@+id/tvProfile"
+                android:paddingTop="12dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="50">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProfile_Nama"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfAlamat"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Alamat"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/secondary"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/address"
+                app:endIconMode="clear_text"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                android:layout_below="@+id/tfNama"
+                android:paddingTop="12dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="100">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProfile_Alamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="100"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfKota"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Kota"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/secondary"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/city"
+                app:endIconMode="clear_text"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                android:layout_below="@+id/tfAlamat"
+                android:paddingTop="12dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="50">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProfile_Kota"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfTelp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Telpon"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/secondary"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/call"
+                app:endIconMode="clear_text"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                android:layout_below="@+id/tfAlamat"
+                android:layout_toEndOf="@+id/tfKota"
+                android:paddingTop="12dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="20">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProfile_Telp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="20"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfKodepos"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Kode Pos"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/secondary"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/postalcode"
+                app:endIconMode="clear_text"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                android:layout_below="@+id/tfKota"
+                android:paddingTop="12dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="6">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProfile_Kodepos"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tfProvinsi"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:hint="Provinsi"
+                app:hintTextColor="@color/black"
+                app:boxStrokeColor="@color/secondary"
+                app:boxStrokeWidth="2dp"
+                app:startIconDrawable="@drawable/province"
+                app:endIconMode="clear_text"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                android:layout_below="@+id/tfTelp"
+                android:layout_toEndOf="@+id/tfKota"
+                android:paddingTop="12dp"
+                android:paddingStart="12dp"
+                android:paddingEnd="12dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="50">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etProfile_Province"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="50"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
                 android:id="@+id/tvBack"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,7 +308,7 @@
                 android:id="@+id/btnSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:layout_below="@+id/etProfile_Telp"
+                android:layout_below="@+id/tfKodepos"
                 android:layout_marginLeft="40dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="40dp"
@@ -114,166 +319,7 @@
                 app:iconGravity="textStart"
                 tools:ignore="SpeakableTextPresentCheck" />
 
-            <TextView
-                android:id="@+id/tvProfile"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text="PROFILE"
-                android:textColor="#072F6C"
-                android:textSize="34sp"
-                android:textStyle="bold"/>
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tvProfile"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Your Name"
-                android:textAllCaps="false"
-                android:textColor="#072F6C"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etProfile_Nama"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Address"
-                android:textAllCaps="false"
-                android:textColor="#072F6C"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etProfile_Alamat"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="City"
-                android:textAllCaps="false"
-                android:textColor="#072F6C"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:id="@+id/textview16"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etProfile_Kota"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Phone"
-                android:textAllCaps="false"
-                android:textColor="#072F6C"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etProfile_Alamat"
-                android:layout_toEndOf="@+id/textview16"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="10dp"
-                android:text="Postal Code"
-                android:textAllCaps="false"
-                android:textColor="#072F6C"
-                android:textSize="20sp"/>
-
-            <TextView
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/etProfile_Kota"
-                android:layout_toEndOf="@+id/etProfile_Kota"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="0dp"
-                android:layout_marginTop="10dp"
-                android:text="Province"
-                android:textAllCaps="false"
-                android:textColor="#072F6C"
-                android:textSize="20sp"/>
-
-            <EditText
-                android:id="@+id/etProfile_Nama"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView12"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="Your Real Name"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"/>
-
-            <EditText
-                android:id="@+id/etProfile_Alamat"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView13"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="Address"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"/>
-
-            <EditText
-                android:id="@+id/etProfile_Kota"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView14"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="City"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"/>
-
-            <EditText
-                android:id="@+id/etProfile_Telp"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview16"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:ems="10"
-                android:hint="Phone"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"/>
-
-            <EditText
-                android:id="@+id/etProfile_Kodepos"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textview16"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="20dp"
-                android:layout_toEndOf="@id/etProfile_Telp"
-                android:ems="10"
-                android:hint="Postal Code"
-                android:inputType="textPersonName"
-                android:minHeight="48dp" />
-
-            <EditText
-                android:id="@+id/etProfile_Province"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView14"
-                android:layout_marginRight="20dp"
-                android:layout_marginLeft="0dp"
-                android:layout_toEndOf="@id/etProfile_Kota"
-                android:ems="10"
-                android:hint="Province"
-                android:inputType="textPersonName"
-                android:minHeight="48dp"/>
-
         </RelativeLayout>
-
 
     </ScrollView>
 
